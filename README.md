@@ -1,2 +1,3 @@
-# toolip
-Collection of python utils for webapps
+# :tulip: toolip :tulip:
+
+A collection of python utils for webapps
