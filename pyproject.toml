@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "toolip"
+version = "0.1.0"
+description = "A collection of python utils for webapps"
+authors = ["Anthony Hillairet <ant@satel.ca>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.4"
+mypy = "^0.910"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
