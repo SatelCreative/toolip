@@ -32,7 +32,7 @@ def create_app_with_basic_auth(prefix: str = '') -> FastAPI:
     app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
     router = APIRouter()
 
-    @router.get("/openapi.json", include_in_schema=False)
+    @router.get(OPENAPI_PATH, include_in_schema=False)
     async def get_open_api_endpoint():
         openapi_schema = get_openapi(
             title=app.title,
