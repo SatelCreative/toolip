@@ -28,8 +28,10 @@ def doc_login(credentials: HTTPBasicCredentials = Depends(security)):
     return
 
 
-def create_app_with_basic_auth(prefix: str = '') -> FastAPI:
-    app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
+def create_app_with_basic_auth(app: FastAPI, prefix: str = '') -> None:
+    errors = [attr for attr in ['docs_url', 'redoc_url', 'openapi_url'] if getattr(app, attr) is not None]
+    if errors:
+        raise ValueError(f'The following attributes must be set to None when creating the FastAPI app: {", ".join(errors)})
     router = APIRouter()
 
     @router.get(OPENAPI_PATH, include_in_schema=False)
