@@ -1,9 +1,9 @@
 import pytest
-from fastapi.testclient import TestClient
+from fastapi import FastAPI
 from pytest import param
 from requests.auth import HTTPBasicAuth
 
-from toolip.fastapi import create_app_with_basic_auth
+from toolip.fastapi import add_basic_auth
 
 basic_auth_params = [
     param('USERNAME', 'X', '', '/openapi.json', 401, id='Openapi doc with wrong password'),
@@ -38,11 +38,44 @@ basic_auth_params = [
 
 
 @pytest.mark.parametrize('username, password, prefix, path, status_code', basic_auth_params)
-def test_add_api_doc_basic_auth(username, password, prefix, path, status_code):
+def test_add_basic_auth(test_client, username, password, prefix, path, status_code):
     auth = HTTPBasicAuth(username=username, password=password)
-    test_client = TestClient(app=create_app_with_basic_auth(prefix=prefix))
-    for r in test_client.app.routes:
-        print(r.path)
+    add_basic_auth(app=test_client.app, prefix=prefix)
     response = test_client.get(path, auth=auth)
-    print(response.text)
     assert response.status_code == status_code
+
+
+app_params = [
+    param(
+        dict(),
+        'docs_url, redoc_url, openapi_url',
+        id='App with no doc url set to None',
+    ),
+    param(
+        dict(app=FastAPI(docs_url=None)),
+        'redoc_url, openapi_url',
+        id='App with only docs url set to None',
+    ),
+    param(
+        dict(docs_url=None, redoc_url=None),
+        'openapi_url',
+        id='App with openapi url not set to None',
+    ),
+    param(
+        dict(redoc_url=None, openapi_url=None),
+        'docs_url',
+        id='App with docs url not set to None',
+    ),
+    param(
+        dict(docs_url=None, openapi_url=None),
+        'redoc_url',
+        id='App with redoc url not set to None',
+    ),
+]
+
+
+@pytest.mark.parametrize('test_app, doc_error', app_params, indirect=['test_app'])
+def test_add_basic_auth_exception(test_app, doc_error):
+    with pytest.raises(ValueError) as ex:
+        add_basic_auth(app=test_app)
+    assert doc_error in str(ex.value)

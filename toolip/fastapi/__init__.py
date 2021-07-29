@@ -1,1 +1,1 @@
-from .app import create_app_with_basic_auth  # noqa: F401
+from .app import add_basic_auth  # noqa: F401

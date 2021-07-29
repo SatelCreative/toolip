@@ -28,10 +28,15 @@ def doc_login(credentials: HTTPBasicCredentials = Depends(security)):
     return
 
 
-def create_app_with_basic_auth(app: FastAPI, prefix: str = '') -> None:
-    errors = [attr for attr in ['docs_url', 'redoc_url', 'openapi_url'] if getattr(app, attr) is not None]
+def add_basic_auth(app: FastAPI, prefix: str = '') -> None:
+    errors = [
+        attr for attr in ['docs_url', 'redoc_url', 'openapi_url'] if getattr(app, attr) is not None
+    ]
     if errors:
-        raise ValueError(f'The following attributes must be set to None when creating the FastAPI app: {", ".join(errors)})
+        raise ValueError(
+            f'The following attributes must be set to None '
+            f'when creating the FastAPI app: {", ".join(errors)}'
+        )
     router = APIRouter()
 
     @router.get(OPENAPI_PATH, include_in_schema=False)
@@ -59,5 +64,3 @@ def create_app_with_basic_auth(app: FastAPI, prefix: str = '') -> None:
         return get_redoc_html(openapi_url=str(app.openapi_url), title=app.title + " - ReDoc")
 
     app.include_router(router, prefix=prefix, dependencies=[Depends(doc_login)])
-
-    return app
