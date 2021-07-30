@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from pytest import param
 from requests.auth import HTTPBasicAuth
 
-from toolip.fastapi import add_basic_auth
+from toolip.fastapi import docs_behind_basic_auth
 
 basic_auth_params = [
     param('USERNAME', 'X', '', '/openapi.json', 401, id='Openapi doc with wrong password'),
@@ -38,9 +38,9 @@ basic_auth_params = [
 
 
 @pytest.mark.parametrize('username, password, prefix, path, status_code', basic_auth_params)
-def test_add_basic_auth(test_client, username, password, prefix, path, status_code):
+def test_docs_behind_basic_auth(test_client, username, password, prefix, path, status_code):
     auth = HTTPBasicAuth(username=username, password=password)
-    add_basic_auth(app=test_client.app, prefix=prefix)
+    docs_behind_basic_auth(app=test_client.app, prefix=prefix)
     response = test_client.get(path, auth=auth)
     assert response.status_code == status_code
 
@@ -75,7 +75,7 @@ app_params = [
 
 
 @pytest.mark.parametrize('test_app, doc_error', app_params, indirect=['test_app'])
-def test_add_basic_auth_exception(test_app, doc_error):
+def test_docs_behind_basic_auth_exception(test_app, doc_error):
     with pytest.raises(ValueError) as ex:
-        add_basic_auth(app=test_app)
+        docs_behind_basic_auth(app=test_app)
     assert doc_error in str(ex.value)
