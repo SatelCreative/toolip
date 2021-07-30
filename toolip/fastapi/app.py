@@ -28,7 +28,7 @@ def doc_login(credentials: HTTPBasicCredentials = Depends(security)):
     return
 
 
-def add_basic_auth(app: FastAPI, prefix: str = '') -> None:
+def docs_behind_basic_auth(app: FastAPI, prefix: str = '') -> None:
     errors = [
         attr for attr in ['docs_url', 'redoc_url', 'openapi_url'] if getattr(app, attr) is not None
     ]
