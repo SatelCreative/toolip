@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import Optional
 
 from pydantic import BaseSettings
 
@@ -10,10 +11,14 @@ class EnvironmentEnum(str, Enum):
     qa = 'qa'
 
 
+class SentryEnvironment(str, Enum):
+    production = 'production'
+    staging = 'staging'
+
+
 class MainConfiguration(BaseSettings):
     environment: EnvironmentEnum = 'development'  # type: ignore
-    public_domain: str = 'mydomain.satel.ca'
-    sentry_environment: str = 'unknown'
+    sentry_environment: Optional[SentryEnvironment] = None
     '''
     Sentry URL to server project, including key
     https://docs.sentry.io/error-reporting/configuration/
