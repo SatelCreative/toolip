@@ -17,13 +17,3 @@ def now_epoch_ms() -> int:
 
 def make_time_aware(dtime: datetime):
     return dtime.replace(tzinfo=pytz.utc)
-
-
-def sh_to_dt_time(shtime):
-    if ':' == shtime[-3:-2]:
-        shtime = shtime[:-3] + shtime[-2:]
-    try:
-        result = datetime.strptime(shtime, '%Y-%m-%dT%H:%M:%S%z')
-    except Exception:
-        result = shtime
-    return result
