@@ -16,7 +16,7 @@ class TagAndModels:
     description: Optional[str] = None
 
 
-def model_to_doc_str(model: Type[BaseModel], title: bool = False):
+def _model_to_doc_str(model: Type[BaseModel], title: bool = False):
     clsname = model.__name__
     schema_title = f'## {clsname}\n'
     schema_description = model.__doc__ + '\n' if model.__doc__ is not None else ''
@@ -42,11 +42,11 @@ def make_docs_router(
         if isinstance(t_n_m.models, list):
             for model in t_n_m.models:
                 models.append(model)
-                tag_description += model_to_doc_str(model=model, title=True)
+                tag_description += _model_to_doc_str(model=model, title=True)
         else:
             model = t_n_m.models
             models.append(model)
-            tag_description += model_to_doc_str(model=model)
+            tag_description += _model_to_doc_str(model=model)
         if t_n_m.tag is None:
             continue
         tags.append(
