@@ -26,10 +26,6 @@ class MainConfiguration(BaseSettings):
     sentry_dsn: str = ''
 
     @property
-    def not_in_production(self) -> bool:
-        return self.environment != EnvironmentEnum.production
-
-    @property
     def in_test(self) -> bool:
         return self.environment == EnvironmentEnum.test
 
