@@ -10,6 +10,7 @@ python = "^3.9"
 fastapi = "^0.65.1"
 loguru = "^0.5.3"
 shortuuid = "^1.0.1"
+apispec = "^5.1.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.4"
