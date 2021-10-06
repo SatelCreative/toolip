@@ -1,0 +1,9 @@
+site_name: Toolip
+site_url: https://example.com/
+nav:
+  - Home: index.md
+  - Modules:
+      - FastAPI: fastapi.md
+      - Utils: utils.md
+  - About: about.md
+theme: readthedocs
