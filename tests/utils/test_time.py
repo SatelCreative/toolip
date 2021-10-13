@@ -12,13 +12,11 @@ def test_now():
 def test_now_epoch():
     now = datetime.now(timezone.utc).timestamp()
     assert now_epoch() == int(now)
-    assert type(now_epoch()) == int
 
 
 def test_now_epoch_ms():
     now = datetime.now(timezone.utc).timestamp() * 1000
     assert now_epoch_ms() == int(now)
-    assert type(now_epoch_ms()) == int
 
 
 def test_make_time_aware():
