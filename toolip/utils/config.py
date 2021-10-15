@@ -17,7 +17,7 @@ class SentryEnvironment(str, Enum):
 
 
 class MainConfiguration(BaseSettings):
-    environment: EnvironmentEnum = 'development'  # type: ignore
+    environment: EnvironmentEnum = EnvironmentEnum.development
     sentry_environment: Optional[SentryEnvironment] = None
     '''
     Sentry URL to server project, including key
