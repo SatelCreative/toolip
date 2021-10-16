@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "toolip"
-version = "0.1.0"
+version = "0.1"
 description = "A collection of python utils for webapps"
 authors = ["Anthony Hillairet <ant@satel.ca>"]
 license = "MIT"
