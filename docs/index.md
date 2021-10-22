@@ -1,6 +1,6 @@
-# Welcome to Toolip
+# :tulip: toolip :tulip:
 
-A collection of python utils for webapps. The github repo can be found [here](https://github.com/SatelCreative/toolip).
+A collection of python utils for webapps.
 
 ## Modules
 

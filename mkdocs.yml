@@ -6,5 +6,4 @@ nav:
   - Modules:
       - FastAPI: fastapi.md
       - Utils: utils.md
-  - About: about.md
 theme: readthedocs
