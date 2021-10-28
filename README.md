@@ -37,15 +37,14 @@ poetry shell
 scripts/test_watch.sh
 ```
 
-### Build and run documentation (mkdocs)
+### Build and run documentation (lazydocs)
 
-Documentation for this package is handled by `mkdocs` and so it needs a few steps to access it locally.
+Documentation for this package is handled by `lazydocs` and so it needs a few steps to generate it locally.
 
 Inside `poetry shell`:
 
 ```bash
-mkdocs build
-mkdocs serve
+lazydocs --overview-file="index.md" --src-base-url="https://github.com/SatelCreative/toolip/tree/main" --validate .
 ```
 
 The default URL is at `127.0.0.1:8000`.

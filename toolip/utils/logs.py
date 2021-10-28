@@ -21,7 +21,17 @@ class InterceptHandler(logging.Handler):
 
 
 def setup_logging(logfilename: str, rotation: str, retention: str) -> None:
-    """Catch and redirect the loggers already defined in uvicorn"""
+    """Sets up logging using loguru. Includes logging of uvicorn and fastapi if it exists in the project. Logs are stored in /python/logs directory.
+
+    Args:
+        logfilename: A required str parameter for specifying the filename.
+        rotation: A required str parameter specifying how long a file's rotation should happen.
+        retention: A required str parameter specifying how long before a file is cleaned up
+
+    Returns:
+        Returns None.
+
+    """
     logging.getLogger('uvicorn.access').handlers = [InterceptHandler()]
     logging.getLogger('fastapi').handlers = [InterceptHandler()]
     logging.getLogger().handlers = [InterceptHandler()]

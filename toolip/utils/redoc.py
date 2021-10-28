@@ -35,6 +35,18 @@ def make_docs_router(
     logo_alt_text: str,
     tags_and_models: List[TagAndModels],
 ) -> APIRouter:
+    """Creates a FastAPI docs router.
+
+    Args:
+        title: A required str parameter.
+        description: A required str parameter.
+        logo_url: A required str parameter in the format of a url.
+        logo_alt_text: A required str parameter.
+        tags_and_models: A list of TagAndModels.
+
+    Returns:
+        The generated APIRouter.
+    """
     tags = []
     models = []
     for t_n_m in tags_and_models:
