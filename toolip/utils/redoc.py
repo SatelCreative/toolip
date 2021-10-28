@@ -53,7 +53,6 @@ def make_docs_router(
             {
                 'name': t_n_m.tag,
                 'description': tag_description,
-                # 'x-displayName': 'The Pet Model',
             }
         )
 
