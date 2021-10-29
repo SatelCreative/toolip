@@ -9,7 +9,7 @@ def test_make_docs_router():
         description='',
         logo_url='',
         logo_alt_text='test logo',
-        tags_and_models=[]
+        tags_and_models=[],
     )
 
     client = TestClient(router)

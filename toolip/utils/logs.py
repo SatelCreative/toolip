@@ -21,7 +21,7 @@ class InterceptHandler(logging.Handler):
 
 
 def setup_logging(logfilename: str, rotation: str, retention: str) -> None:
-    """ Catch and redirect the loggers already defined in uvicorn """
+    """Catch and redirect the loggers already defined in uvicorn"""
     logging.getLogger('uvicorn.access').handlers = [InterceptHandler()]
     logging.getLogger('fastapi').handlers = [InterceptHandler()]
     logging.getLogger().handlers = [InterceptHandler()]
