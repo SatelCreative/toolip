@@ -120,6 +120,7 @@ venv.bak/
 # lazydocs documentation
 /docs
 /site
+/docs/api-docs
 
 # mypy
 .mypy_cache/
