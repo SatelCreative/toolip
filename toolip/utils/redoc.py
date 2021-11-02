@@ -38,10 +38,10 @@ def make_docs_router(
     """Creates a FastAPI docs router.
 
     Args:
-        title: A required str parameter.
-        description: A required str parameter.
-        logo_url: A required str parameter in the format of a url.
-        logo_alt_text: A required str parameter.
+        title: Title of the API documentation page.
+        description: Description section for the API documentation.
+        logo_url: URL to a logo to use in the API documentation.
+        logo_alt_text: Alternate text to the logo.
         tags_and_models: A list of TagAndModels.
 
     Returns:

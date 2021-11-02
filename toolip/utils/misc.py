@@ -5,7 +5,7 @@ def get_unique_id(length: int) -> str:
     """A utility function to generate a random ShortUUID of a given length.
 
     Args:
-        length: A required int parameter to specify the length of the generated uuid.
+        length: Length of the randomly generated UUID.
 
     Returns:
         Returns a random ShortUUID.

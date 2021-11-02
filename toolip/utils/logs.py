@@ -24,9 +24,9 @@ def setup_logging(logfilename: str, rotation: str, retention: str) -> None:
     """Sets up logging using loguru. Includes logging of uvicorn and fastapi if it exists in the project. Logs are stored in /python/logs directory.
 
     Args:
-        logfilename: A required str parameter for specifying the filename.
-        rotation: A required str parameter specifying how long a file's rotation should happen.
-        retention: A required str parameter specifying how long before a file is cleaned up
+        logfilename: Filename of the log file.
+        rotation: Specifies how long a file's rotation should happen.
+        retention: Specifies how long before a file is cleaned up.
 
     Returns:
         Returns None.
