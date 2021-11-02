@@ -1,4 +1,4 @@
-from shortuuid import ShortUUID  # type: ignore
+from shortuuid import ShortUUID
 
 
 def get_unique_id(length: int) -> str:

@@ -45,3 +45,10 @@ skip-string-normalization = true
 [tool.isort]
 profile = "black"
 known_third_party = ["fastapi", "pydantic", "starlette"]
+
+[[tool.mypy.overrides]]
+module = [
+    'shortuuid',
+    'apispec'
+]
+ignore_missing_imports = true

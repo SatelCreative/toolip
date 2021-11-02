@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List, Optional, Type, Union
 
-from apispec import APISpec  # type: ignore
+from apispec import APISpec
 from fastapi import APIRouter
 from fastapi.openapi.docs import get_redoc_html
 from pydantic import BaseModel
