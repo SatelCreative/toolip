@@ -38,6 +38,7 @@ jobs:
         run: poetry install --no-interaction
       - name: Build lazydocs
         run: |
+          source .venv/bin/activate
           lazydocs --overview-file="index.md" --src-base-url="https://github.com/SatelCreative/toolip/tree/main" --output-path="./docs/api-docs" --validate .
       - name: Deploy MkDocs
         uses: mhausenblas/mkdocs-deploy-gh-pages@1.24
