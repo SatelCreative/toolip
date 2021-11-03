@@ -2,7 +2,10 @@ name: Build documentation
 on:
   push:
     branches:
-      - gh-pages
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -11,7 +14,9 @@ jobs:
     steps:
       - name: Checkout main
         uses: actions/checkout@v2
-
+      - name: Build lazydocs
+        run: |
+          lazydocs --overview-file="index.md" --src-base-url="https://github.com/SatelCreative/toolip/tree/main" --output-path="./docs/api-docs" --validate .
       - name: Deploy docs
         uses: mhausenblas/mkdocs-deploy-gh-pages@master
         # Or use mhausenblas/mkdocs-deploy-gh-pages@nomaterial to build without the mkdocs-material theme
