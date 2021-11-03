@@ -1,1 +1,2 @@
 lazydocs==0.4.8
+pydocstyle==6.1.1
