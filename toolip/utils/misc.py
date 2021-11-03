@@ -8,7 +8,8 @@ def get_unique_id(length: int) -> str:
         length: Length of the randomly generated UUID.
 
     Returns:
-        Returns a random ShortUUID.
+        Returns a random ShortUUID. For example: get_unique_id(8)
+        will return 'gxZicyar'.
 
     """
     return ShortUUID().random(length=length)

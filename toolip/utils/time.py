@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 import pytz
 
 
-def now():
+def now() -> datetime:
     """Returns the current datetime in utc.
 
     Returns:
@@ -33,7 +33,7 @@ def now_epoch_ms() -> int:
     return int(datetime.now(timezone.utc).timestamp() * 1000)
 
 
-def make_time_aware(dtime: datetime):
+def make_time_aware(dtime: datetime) -> datetime:
     """Converts given datetime to utc.
 
     Args:

@@ -118,7 +118,6 @@ venv.bak/
 .ropeproject
 
 # lazydocs documentation
-/docs
 /site
 /docs/api-docs
 

@@ -21,7 +21,8 @@ class InterceptHandler(logging.Handler):
 
 
 def setup_logging(logfilename: str, rotation: str, retention: str) -> None:
-    """Sets up logging using loguru. Includes logging of uvicorn and fastapi if it exists in the project. Logs are stored in /python/logs directory.
+    """Sets up logging using loguru. Includes logging of uvicorn and fastapi if it \
+    exists in the project. Logs are stored in /python/logs directory.
 
     Args:
         logfilename: Filename of the log file.
