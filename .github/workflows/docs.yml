@@ -15,11 +15,13 @@ jobs:
     steps:
       - name: Checkout main
         uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install lazydocs pydocstyle
       - name: Build lazydocs
         run: |
           lazydocs --overview-file="index.md" --src-base-url="https://github.com/SatelCreative/toolip/tree/main" --output-path="./docs/api-docs" --validate .
-        env:
-          REQUIREMENTS: docs/requirements.txt
       - name: Deploy MkDocs
         uses: mhausenblas/mkdocs-deploy-gh-pages@1.24
         # Or use mhausenblas/mkdocs-deploy-gh-pages@nomaterial to build without the mkdocs-material theme
