@@ -23,7 +23,11 @@ flake8-isort = "4.0.0"
 requests = "2.26.0"
 types-requests="2.25.0"
 black = "21.5b2"
-mkdocs = "1.2.2"
+mkdocs = "1.2.3"
+mkdocs-awesome-pages-plugin = "v2.6.0"
+mkdocs-material = "7.3.6"
+lazydocs = "0.4.8"
+pydocstyle = "^6.1.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -45,6 +49,10 @@ skip-string-normalization = true
 [tool.isort]
 profile = "black"
 known_third_party = ["fastapi", "pydantic", "starlette"]
+
+[tool.pydocstyle]
+convention = "google"
+add-ignore = "D106,D104,D205,D415"
 
 [[tool.mypy.overrides]]
 module = [

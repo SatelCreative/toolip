@@ -37,13 +37,18 @@ poetry shell
 scripts/test_watch.sh
 ```
 
-### Build and run documentation (mkdocs)
+### Build and run documentation (lazydocs/mkdocs)
 
-Documentation for this package is handled by `mkdocs` and so it needs a few steps to access it locally.
+Documentation for this package is handled by `lazydocs` and so it needs a few steps to generate it locally.
 
 Inside `poetry shell`:
 
 ```bash
+lazydocs --overview-file="index.md" \
+--src-base-url="https://github.com/SatelCreative/toolip/tree/main" \
+--output-path="./docs/api-docs" \
+--validate .
+
 mkdocs build
 mkdocs serve
 ```
