@@ -48,7 +48,7 @@ Inside `poetry shell`:
 lazydocs --overview-file="index.md" \
 --src-base-url="https://github.com/SatelCreative/toolip/tree/main" \
 --output-path="./docs/api-docs" \
---validate .
+--validate toolip
 
 mkdocs build
 mkdocs serve
