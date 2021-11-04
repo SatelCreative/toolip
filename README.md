@@ -3,6 +3,7 @@
 A collection of python utils for webapps
 
 ![Tests](https://github.com/SatelCreative/toolip/actions/workflows/tests.yml/badge.svg)
+[![Build documentation](https://github.com/SatelCreative/toolip/actions/workflows/docs.yml/badge.svg)](https://github.com/SatelCreative/toolip/actions/workflows/docs.yml)
 
 ## Installation
 
