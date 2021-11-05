@@ -17,6 +17,10 @@ security = HTTPBasic()
 
 
 def doc_login(credentials: HTTPBasicCredentials = Depends(security)):
+    # Disable authentication if no username and password is set
+    if not conf.doc_auth_is_on:
+        return
+
     correct_username = compare_digest(credentials.username, conf.doc_username)
     correct_password = compare_digest(credentials.password, conf.doc_password)
     if not (correct_username and correct_password):
