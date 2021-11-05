@@ -2,8 +2,8 @@ from pydantic import BaseSettings
 
 
 class Configuration(BaseSettings):
-    doc_username: str
-    doc_password: str
+    doc_username: str = ""
+    doc_password: str = ""
 
     class Config:
         """Pydantic class to add prefix to properties defined."""
