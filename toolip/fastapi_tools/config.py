@@ -14,7 +14,7 @@ class Configuration(BaseSettings):
     @validator('doc_username')
     def username_not_empty(cls, value):
         if value and len(value) > 0:
-           return value
+            return value
         raise ValueError('Username must not be an empty string')
 
     @validator('doc_password')
@@ -24,7 +24,8 @@ class Configuration(BaseSettings):
             if not username:
                 raise ValueError('Username and Password should both be set')
             return value
-        raise ValueError('Password must not be an empty string') 
+        raise ValueError('Password must not be an empty string')
+
     class Config:
         """Pydantic class to add prefix to properties defined."""
 
