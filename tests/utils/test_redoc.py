@@ -9,7 +9,7 @@ def test_make_docs_router():
         description='',
         logo_url='',
         logo_alt_text='test logo',
-        tags_and_models=[]
+        tags_and_models=[],
     )
 
     client = TestClient(router)
@@ -18,4 +18,4 @@ def test_make_docs_router():
 
     openapi_response = client.get('/openapi.json')
     assert openapi_response.status_code == 200
-    assert openapi_response.title == 'Test Doc'
+    assert openapi_response.json()['info']['title'] == 'Test Doc'
