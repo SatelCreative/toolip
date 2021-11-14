@@ -19,10 +19,10 @@ class SentryEnvironment(str, Enum):
 class MainConfiguration(BaseSettings):
     environment: EnvironmentEnum = EnvironmentEnum.development
     sentry_environment: Optional[SentryEnvironment] = None
-    '''
+    """
     Sentry URL to server project, including key
     https://docs.sentry.io/error-reporting/configuration/
-    '''
+    """
     sentry_dsn: str = ''
 
     @property

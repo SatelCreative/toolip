@@ -22,8 +22,8 @@ def doc_login(credentials: HTTPBasicCredentials = Depends(security)):
     if not (correct_username and correct_password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username or password",
-            headers={"WWW-Authenticate": "Basic"},
+            detail='Incorrect username or password',
+            headers={'WWW-Authenticate': 'Basic'},
         )
     return
 
@@ -53,7 +53,7 @@ def docs_behind_basic_auth(app: FastAPI, prefix: str = '') -> None:
 
     @router.get(DOCS_PATH, include_in_schema=False)
     async def custom_swagger_ui_html():
-        return get_swagger_ui_html(openapi_url=app.openapi_url, title=app.title + " - Swagger UI")
+        return get_swagger_ui_html(openapi_url=app.openapi_url, title=app.title + ' - Swagger UI')
 
     @router.get(str(app.swagger_ui_oauth2_redirect_url), include_in_schema=False)
     async def swagger_ui_redirect():
@@ -61,6 +61,6 @@ def docs_behind_basic_auth(app: FastAPI, prefix: str = '') -> None:
 
     @router.get(REDOC_PATH, include_in_schema=False)
     async def redoc_html() -> HTMLResponse:
-        return get_redoc_html(openapi_url=str(app.openapi_url), title=app.title + " - ReDoc")
+        return get_redoc_html(openapi_url=str(app.openapi_url), title=app.title + ' - ReDoc')
 
     app.include_router(router, prefix=prefix, dependencies=[Depends(doc_login)])
