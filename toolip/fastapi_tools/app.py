@@ -17,14 +17,15 @@ security = HTTPBasic()
 
 
 def doc_login(credentials: HTTPBasicCredentials = Depends(security)):
-    correct_username = compare_digest(credentials.username, conf.doc_username)
-    correct_password = compare_digest(credentials.password, conf.doc_password)
-    if not (correct_username and correct_password):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username or password",
-            headers={"WWW-Authenticate": "Basic"},
-        )
+    if conf.doc_username is not None and conf.doc_password is not None:
+        correct_username = compare_digest(credentials.username, conf.doc_username)
+        correct_password = compare_digest(credentials.password, conf.doc_password)
+        if not (correct_username and correct_password):
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Incorrect username or password",
+                headers={"WWW-Authenticate": "Basic"},
+            )
     return
 
 
@@ -63,4 +64,8 @@ def docs_behind_basic_auth(app: FastAPI, prefix: str = '') -> None:
     async def redoc_html() -> HTMLResponse:
         return get_redoc_html(openapi_url=str(app.openapi_url), title=app.title + " - ReDoc")
 
-    app.include_router(router, prefix=prefix, dependencies=[Depends(doc_login)])
+    # Disable authentication if no username and password is set
+    if not conf.doc_auth_is_on:
+        app.include_router(router, prefix=prefix)
+    else:
+        app.include_router(router, prefix=prefix, dependencies=[Depends(doc_login)])
