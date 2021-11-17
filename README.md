@@ -3,6 +3,7 @@
 A collection of python utils for webapps
 
 ![Tests](https://github.com/SatelCreative/toolip/actions/workflows/tests.yml/badge.svg)
+[![Build documentation](https://github.com/SatelCreative/toolip/actions/workflows/docs.yml/badge.svg)](https://github.com/SatelCreative/toolip/actions/workflows/docs.yml)
 
 ## Installation
 
@@ -47,7 +48,7 @@ Inside `poetry shell`:
 lazydocs --overview-file="index.md" \
 --src-base-url="https://github.com/SatelCreative/toolip/tree/main" \
 --output-path="./docs/api-docs" \
---validate .
+--validate toolip
 
 mkdocs build
 mkdocs serve
