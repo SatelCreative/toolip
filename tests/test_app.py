@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from pytest import param
 from requests.auth import HTTPBasicAuth
 
-from toolip.fastapi import docs_behind_basic_auth
+from toolip.fastapi_tools import docs_behind_basic_auth
 
 basic_auth_params = [
     param('USERNAME', 'X', '', '/openapi.json', 401, id='Openapi doc with wrong password'),
