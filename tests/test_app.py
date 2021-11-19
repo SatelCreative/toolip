@@ -14,7 +14,7 @@ basic_auth_params = [
         '',
         '/openapi.json',
         401,
-        id='Openapi doc with wrong password'
+        id='Openapi doc with wrong password',
     ),
     param(
         'X',
@@ -24,7 +24,7 @@ basic_auth_params = [
         '',
         '/openapi.json',
         401,
-        id='Openapi doc with wrong username'
+        id='Openapi doc with wrong username',
     ),
     param(
         'USERNAME',
@@ -44,7 +44,7 @@ basic_auth_params = [
         '',
         '/docs',
         200,
-        id='Docs with correct username and password'
+        id='Docs with correct username and password',
     ),
     param(
         'USERNAME',
@@ -64,7 +64,7 @@ basic_auth_params = [
         '/api',
         '/openapi.json',
         404,
-        id='Openapi doc with wrong path'
+        id='Openapi doc with wrong path',
     ),
     param(
         'USERNAME',
@@ -79,10 +79,14 @@ basic_auth_params = [
 ]
 
 
-@pytest.mark.parametrize('conf_username, \
-    conf_password, username, password, prefix, path, status_code', basic_auth_params)
-def test_docs_behind_basic_auth(test_client, conf_username,
-                                conf_password, username, password, prefix, path, status_code):
+@pytest.mark.parametrize(
+    'conf_username, \
+    conf_password, username, password, prefix, path, status_code',
+    basic_auth_params,
+)
+def test_docs_behind_basic_auth(
+    test_client, conf_username, conf_password, username, password, prefix, path, status_code
+):
     auth = HTTPBasicAuth(username=username, password=password)
     set_config(username=conf_username, password=conf_password)
     docs_behind_basic_auth(app=test_client.app, prefix=prefix)
