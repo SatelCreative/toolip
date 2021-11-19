@@ -10,16 +10,22 @@ from fastapi.openapi.utils import get_openapi
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 
-from .config import conf
+from .config import Configuration
 from .constants import DOCS_PATH, OPENAPI_PATH, REDOC_PATH
 
 security = HTTPBasic()
+_conf = Configuration(doc_username=None, doc_password=None)
+
+
+def set_config(username: str, password: str) -> None:
+    global _conf
+    _conf = Configuration(doc_username=username, doc_password=password)
 
 
 def doc_login(credentials: HTTPBasicCredentials = Depends(security)):
-    if conf.doc_username is not None and conf.doc_password is not None:
-        correct_username = compare_digest(credentials.username, conf.doc_username)
-        correct_password = compare_digest(credentials.password, conf.doc_password)
+    if _conf.doc_username is not None and _conf.doc_password is not None:
+        correct_username = compare_digest(credentials.username, _conf.doc_username)
+        correct_password = compare_digest(credentials.password, _conf.doc_password)
         if not (correct_username and correct_password):
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
@@ -65,7 +71,7 @@ def docs_behind_basic_auth(app: FastAPI, prefix: str = '') -> None:
         return get_redoc_html(openapi_url=str(app.openapi_url), title=app.title + ' - ReDoc')
 
     # Disable authentication if no username and password is set
-    if not conf.doc_auth_is_on:
+    if not _conf.doc_auth_is_on:
         app.include_router(router, prefix=prefix)
     else:
         app.include_router(router, prefix=prefix, dependencies=[Depends(doc_login)])

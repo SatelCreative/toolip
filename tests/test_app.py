@@ -3,12 +3,32 @@ from fastapi import FastAPI
 from pytest import param
 from requests.auth import HTTPBasicAuth
 
-from toolip.fastapi_tools import docs_behind_basic_auth
+from toolip.fastapi_tools import docs_behind_basic_auth, set_config
 
 basic_auth_params = [
-    param('USERNAME', 'X', '', '/openapi.json', 401, id='Openapi doc with wrong password'),
-    param('X', 'PASSWORD', '', '/openapi.json', 401, id='Openapi doc with wrong username'),
     param(
+        'USERNAME',
+        'X',
+        'USERNAME',
+        'Z',
+        '',
+        '/openapi.json',
+        401,
+        id='Openapi doc with wrong password',
+    ),
+    param(
+        'X',
+        'PASSWORD',
+        'Z',
+        'PASSWORD',
+        '',
+        '/openapi.json',
+        401,
+        id='Openapi doc with wrong username',
+    ),
+    param(
+        'USERNAME',
+        'PASSWORD',
         'USERNAME',
         'PASSWORD',
         '',
@@ -16,8 +36,19 @@ basic_auth_params = [
         200,
         id='Openapi doc with correct username and password',
     ),
-    param('USERNAME', 'PASSWORD', '', '/docs', 200, id='Docs with correct username and password'),
     param(
+        'USERNAME',
+        'PASSWORD',
+        'USERNAME',
+        'PASSWORD',
+        '',
+        '/docs',
+        200,
+        id='Docs with correct username and password',
+    ),
+    param(
+        'USERNAME',
+        'PASSWORD',
         'USERNAME',
         'PASSWORD',
         '',
@@ -25,8 +56,19 @@ basic_auth_params = [
         200,
         id='Redoc with correct username and password',
     ),
-    param('USERNAME', 'PASSWORD', '/api', '/openapi.json', 404, id='Openapi doc with wrong path'),
     param(
+        'USERNAME',
+        'PASSWORD',
+        'USERNAME',
+        'PASSWORD',
+        '/api',
+        '/openapi.json',
+        404,
+        id='Openapi doc with wrong path',
+    ),
+    param(
+        'USERNAME',
+        'PASSWORD',
         'USERNAME',
         'PASSWORD',
         '/api',
@@ -37,9 +79,16 @@ basic_auth_params = [
 ]
 
 
-@pytest.mark.parametrize('username, password, prefix, path, status_code', basic_auth_params)
-def test_docs_behind_basic_auth(test_client, username, password, prefix, path, status_code):
+@pytest.mark.parametrize(
+    'conf_username, \
+    conf_password, username, password, prefix, path, status_code',
+    basic_auth_params,
+)
+def test_docs_behind_basic_auth(
+    test_client, conf_username, conf_password, username, password, prefix, path, status_code
+):
     auth = HTTPBasicAuth(username=username, password=password)
+    set_config(username=conf_username, password=conf_password)
     docs_behind_basic_auth(app=test_client.app, prefix=prefix)
     response = test_client.get(path, auth=auth)
     assert response.status_code == status_code
