@@ -10,10 +10,16 @@ from fastapi.openapi.utils import get_openapi
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 
-from .config import conf
+from .config import Configuration
 from .constants import DOCS_PATH, OPENAPI_PATH, REDOC_PATH
 
 security = HTTPBasic()
+conf = Configuration(doc_username=None, doc_password=None)
+
+
+def set_config(username: str, password: str) -> None:
+    # Re-instantiate to run validators
+    conf = Configuration(doc_username=username, doc_password=password)
 
 
 def doc_login(credentials: HTTPBasicCredentials = Depends(security)):
