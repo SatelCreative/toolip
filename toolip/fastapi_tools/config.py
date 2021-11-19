@@ -4,8 +4,8 @@ from pydantic import BaseSettings, root_validator
 
 
 class Configuration(BaseSettings):
-    doc_username: Optional[str] = ...  # type: ignore
-    doc_password: Optional[str] = ...  # type: ignore
+    doc_username: Optional[str] = None
+    doc_password: Optional[str] = None
 
     @property
     def doc_auth_is_on(self):
@@ -13,8 +13,6 @@ class Configuration(BaseSettings):
 
     @root_validator
     def check_creds(cls, values):
-        username = values.get('doc_username')
-        password = values.get('doc_password')
-        if (username is None) ^ (password is None):
+        if ('doc_username' in values) ^ ('doc_password' in values):
             raise ValueError('Username and Password should both be set or both not set')
         return values
