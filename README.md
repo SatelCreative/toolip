@@ -70,4 +70,3 @@ because unlike poetry it allows to set the metadata on pypi such as author or ho
 3. Run `poetry build` to create the package folders in `/dist`
 4. Run `flit publish` to publish to PyPI
 5. Tag the release in git and push it to Github
-   a

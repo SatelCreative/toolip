@@ -22,7 +22,6 @@ jobs:
         run: |
           DIFF=$(diff README.md docs/index.md)
           if [ "$DIFF" != "" ]; then
-              echo "$DIFF"
               exit 1
           else
               exit 0
